@@ -1,0 +1,283 @@
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    min-height: 100%;
+    background: #080d10;
+    color: #d7e1d8;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow: hidden;
+}
+
+button {
+    font: inherit;
+}
+
+.main-menu {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(3, 8, 12, 0.96) 0%,
+            rgba(3, 8, 12, 0.83) 28%,
+            rgba(3, 8, 12, 0.35) 52%,
+            rgba(3, 8, 12, 0.05) 100%
+        ),
+        url("images/station.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.menu-panel {
+    position: absolute;
+    left: 7%;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: min(440px, 43%);
+    padding: 25px 0;
+}
+
+.game-subtitle {
+    color: #9aafa2;
+    font-size: 15px;
+    letter-spacing: 3px;
+    line-height: 1.8;
+    font-weight: 600;
+}
+
+h1 {
+    margin: 25px 0;
+    color: #e2ebdc;
+    font-size: clamp(48px, 6vw, 86px);
+    line-height: 0.95;
+    letter-spacing: 4px;
+    font-weight: 800;
+
+    text-shadow:
+        3px 3px 0 #33443b,
+        0 0 25px rgba(144, 193, 151, 0.18);
+}
+
+.separator {
+    width: 100%;
+    height: 2px;
+    margin: 30px 0;
+
+    background: linear-gradient(
+        90deg,
+        #8ca995,
+        rgba(140, 169, 149, 0)
+    );
+}
+
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.menu-buttons button {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    width: 100%;
+    min-height: 58px;
+    padding: 14px 18px;
+
+    color: #b9c9bd;
+    text-align: left;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+
+    background: rgba(8, 15, 17, 0.65);
+    border: 1px solid rgba(112, 142, 117, 0.18);
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.menu-buttons button:hover,
+.menu-buttons button:focus-visible {
+    color: #f0f5e8;
+    background: rgba(63, 88, 69, 0.65);
+    border-color: #8ca995;
+    outline: none;
+}
+
+.cursor {
+    width: 12px;
+    flex-shrink: 0;
+    color: #c3e5b9;
+}
+
+.menu-buttons button:not(:hover):not(:focus-visible)
+.cursor:empty {
+    visibility: hidden;
+}
+
+.version {
+    margin-top: 35px;
+    color: #819187;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    line-height: 1.8;
+}
+
+/* АКТИВНЫЙ СИГНАЛ — ВСЕГДА СВЕРХУ СПРАВА */
+
+.signal {
+    position: absolute;
+    top: 28px;
+    right: 35px;
+    bottom: auto;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: #a0b7a2;
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    z-index: 10;
+}
+
+.signal-light {
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+
+    background: #e34b40;
+    border-radius: 50%;
+    box-shadow: 0 0 12px #e34b40;
+
+    animation: blink 2s infinite;
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+}
+
+/* Горизонтальные экраны телефонов */
+
+@media (max-height: 500px) {
+    .menu-panel {
+        left: 5%;
+        width: min(340px, 42%);
+        padding: 5px 0;
+    }
+
+    .game-subtitle {
+        margin: 0;
+        font-size: 10px;
+    }
+
+    h1 {
+        margin: 12px 0;
+        font-size: clamp(32px, 6vh, 46px);
+    }
+
+    .separator {
+        margin: 12px 0;
+    }
+
+    .menu-buttons {
+        gap: 4px;
+    }
+
+    .menu-buttons button {
+        min-height: 38px;
+        padding: 7px 10px;
+        font-size: 14px;
+    }
+
+    .version {
+        margin-top: 10px;
+        font-size: 9px;
+    }
+
+    .signal {
+        top: 15px;
+        right: 18px;
+        font-size: 10px;
+    }
+}
+
+/* Вертикальные экраны телефонов */
+
+@media (orientation: portrait) {
+    .main-menu {
+        background-image:
+            linear-gradient(
+                180deg,
+                rgba(3, 8, 12, 0.05) 0%,
+                rgba(3, 8, 12, 0.15) 25%,
+                rgba(3, 8, 12, 0.92) 58%,
+                rgba(3, 8, 12, 0.98) 100%
+            ),
+            url("images/station.jpg");
+
+        background-position: center;
+    }
+
+    .menu-panel {
+        top: auto;
+        bottom: 7%;
+        left: 7%;
+        transform: none;
+
+        width: 86%;
+        padding: 0;
+    }
+
+    h1 {
+        margin: 14px 0;
+        font-size: clamp(42px, 11vw, 64px);
+    }
+
+    .separator {
+        margin: 18px 0;
+    }
+
+    .menu-buttons button {
+        min-height: 52px;
+        font-size: 17px;
+    }
+
+    .version {
+        margin-top: 18px;
+    }
+
+    .signal {
+        top: 18px;
+        right: 15px;
+        bottom: auto;
+        font-size: 10px;
+    }
+}
