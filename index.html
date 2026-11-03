@@ -1,16 +1,29 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>Частота 4625</title>
+    <meta name="theme-color" content="#080d10">
+
+    <title>Последний сигнал</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+
+    <!-- Экран поворота телефона -->
+    <div class="rotate-screen" id="rotate-screen">
+        <div class="rotate-content">
+            <div class="rotate-icon">↻</div>
+            <h2>ПОВЕРНИТЕ УСТРОЙСТВО</h2>
+            <p>Для работы радиостанции необходим горизонтальный экран</p>
+            <span>ОБЪЕКТ 4625 · ОЖИДАНИЕ</span>
+        </div>
+    </div>
 
     <main class="main-menu">
 
@@ -53,6 +66,42 @@
     </main>
 
     <script src="game.js"></script>
+
+    <script>
+        // Запрос горизонтальной ориентации после взаимодействия
+        async function requestLandscape() {
+            try {
+                if (screen.orientation &&
+                    screen.orientation.lock) {
+                    await screen.orientation.lock("landscape");
+                }
+            } catch (error) {
+                // Если браузер не поддерживает блокировку,
+                // пользователь сможет повернуть телефон вручную.
+            }
+        }
+
+        // Показываем экран поворота в вертикальном положении
+        function checkOrientation() {
+            const rotateScreen =
+                document.getElementById("rotate-screen");
+
+            if (window.matchMedia("(orientation: portrait)").matches) {
+                rotateScreen.style.display = "flex";
+            } else {
+                rotateScreen.style.display = "none";
+            }
+        }
+
+        window.addEventListener("load", checkOrientation);
+        window.addEventListener("resize", checkOrientation);
+        window.addEventListener("orientationchange", checkOrientation);
+
+        // Запрашиваем горизонтальный режим при первом нажатии
+        document.addEventListener("click", requestLandscape, {
+            once: true
+        });
+    </script>
 
 </body>
 </html>
